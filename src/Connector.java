@@ -7,7 +7,7 @@ public class Connector {
     private final String DATABASE = "student_information";
     private final String PASSWORD = "";
 
-    private Connection connection;
+    private static Connection connection;
 
     public Connector() {
         try {

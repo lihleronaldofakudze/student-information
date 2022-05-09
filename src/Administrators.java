@@ -73,6 +73,32 @@ public class Administrators extends Actions {
         this.password = password;
     }
 
+    public boolean login() {
+        System.out.println("Enter the email");
+        setEmail(scanner.nextLine());
+
+        System.out.println("Enter the password");
+        setPassword(scanner.nextLine());
+
+        String query = "SELECT * FROM administrators WHERE email = ? AND password = ?";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, getEmail());
+            preparedStatement.setString(2, getPassword());
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()) {
+                System.out.println("Login successful");
+                return true;
+            } else {
+                System.out.println("Login failed");
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     @Override
     void add() {
         System.out.println("Enter the role id");
